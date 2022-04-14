@@ -30,4 +30,15 @@ public class MarsRoverTest {
         assertThat(expected).isEqualTo(initialDirection);
     }
 
+    @Test
+    public void should_inform_about_rover_full_location() {
+        Position initialPosition = new Position(2,1);
+        Direction initialDirection = Direction.SOUTH;
+
+        Rover rover = new Rover(initialPosition, initialDirection);
+
+        String expected = rover.fullLocation();
+
+        assertThat(expected).isEqualTo("2:1:S");
+    }
 }

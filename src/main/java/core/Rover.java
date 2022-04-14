@@ -17,4 +17,8 @@ public class Rover {
     public Direction currentDirection() {
         return this.direction;
     }
+
+    public String fullLocation() {
+        return ""+position.x()+":"+position.y()+":"+direction.getValue();
+    }
 }
