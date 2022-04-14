@@ -47,12 +47,14 @@ public class Rover {
     }
 
     public void turnLeft() {
-        if (this.direction.equals(Direction.SOUTH))
+        if (this.direction.equals(Direction.EAST)){
+            this.direction = Direction.NORTH;
+        } else if (this.direction.equals(Direction.SOUTH)) {
             this.direction = Direction.EAST;
-        if (this.direction.equals(Direction.WEST))
+        } else if (this.direction.equals(Direction.WEST)) {
             this.direction = Direction.SOUTH;
-        if (this.direction.equals(Direction.NORTH))
+        } else {
             this.direction = Direction.WEST;
-
+        }
     }
 }
