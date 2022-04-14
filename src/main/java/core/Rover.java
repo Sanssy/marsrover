@@ -45,4 +45,9 @@ public class Rover {
         Vector vector = movingRules.get(this.direction);
         this.position = this.position.translate(vector.reverse());
     }
+
+    public void turnLeft() {
+        if (this.direction.equals(Direction.NORTH))
+            this.direction = Direction.WEST;
+    }
 }
