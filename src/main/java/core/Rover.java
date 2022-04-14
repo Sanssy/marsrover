@@ -25,5 +25,7 @@ public class Rover {
     public void moveForward() {
         if (this.direction.equals(Direction.NORTH))
             this.position = this.position.translate(0, 1);
+        if (this.direction.equals(Direction.SOUTH))
+            this.position = this.position.translate(0, -1);
     }
 }
