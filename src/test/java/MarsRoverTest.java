@@ -115,5 +115,17 @@ public class MarsRoverTest {
         assertThat(rover.currentDirection()).isEqualTo(Direction.WEST);
     }
 
+    @Test
+    public void should_turn_rover_at_left_and_change_his_initial_direction_facing_west_to_south() {
+        Position initialPosition = new Position(3,3);
+        Direction initialDirection = Direction.WEST;
+
+        Rover rover = new Rover(initialPosition, initialDirection);
+
+        rover.turnLeft();
+
+        assertThat(rover.currentDirection()).isEqualTo(Direction.SOUTH);
+    }
+
 
 }
