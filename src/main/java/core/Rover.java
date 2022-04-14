@@ -1,11 +1,25 @@
 package core;
 
+import java.util.EnumMap;
+
 public class Rover {
 
     private Position position;
     private Direction direction;
 
+    static EnumMap<Direction, Vector> movingRules;
+
+    Rover() {
+        movingRules = new EnumMap<>(Direction.class);
+        movingRules.put(Direction.NORTH, new Vector(0, 1));
+        movingRules.put(Direction.EAST, new Vector(1, 0));
+        movingRules.put(Direction.SOUTH, new Vector(0, -1));
+        movingRules.put(Direction.WEST, new Vector(-1, 0));
+    }
+
+
     public Rover(Position position, Direction direction) {
+        this();
         this.position = position;
         this.direction = direction;
     }
@@ -23,13 +37,7 @@ public class Rover {
     }
 
     public void moveForward() {
-        if (this.direction.equals(Direction.NORTH))
-            this.position = this.position.translate(0, 1);
-        if (this.direction.equals(Direction.SOUTH))
-            this.position = this.position.translate(0, -1);
-        if (this.direction.equals(Direction.EAST))
-            this.position = this.position.translate(1, 0);
-        if (this.direction.equals(Direction.WEST))
-            this.position = this.position.translate(-1, 0);
+        Vector vector = movingRules.get(this.direction);
+        this.position = this.position.translate(vector);
     }
 }

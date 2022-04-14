@@ -3,7 +3,7 @@ package core;
 public enum Direction {
     NORTH("N"), SOUTH("S"), EAST("E"), WEST("W");
 
-    private String value;
+    private final String value;
 
     Direction(String value) {
         this.value = value;
