@@ -40,4 +40,9 @@ public class Rover {
         Vector vector = movingRules.get(this.direction);
         this.position = this.position.translate(vector);
     }
+
+    public void moveBackward() {
+        Vector vector = movingRules.get(this.direction);
+        this.position = this.position.translate(vector.reverse());
+    }
 }
