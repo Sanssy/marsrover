@@ -32,10 +32,7 @@ public class MarsRoverTest {
 
     @Test
     public void should_inform_about_rover_full_location() {
-        Position initialPosition = new Position(2,1);
-        Direction initialDirection = Direction.SOUTH;
-
-        Rover rover = new Rover(initialPosition, initialDirection);
+        Rover rover = initRoverPositionAndDirection(2, 1, Direction.SOUTH);
 
         String expected = rover.fullLocation();
 
@@ -44,10 +41,7 @@ public class MarsRoverTest {
 
     @Test
     public void should_move_rover_forward_with_starting_point_at_0_2() {
-        Position initialPosition = new Position(0,2);
-        Direction initialDirection = Direction.NORTH;
-
-        Rover rover = new Rover(initialPosition, initialDirection);
+        Rover rover = initRoverPositionAndDirection(0, 2, Direction.NORTH);
 
         rover.moveForward();
 
@@ -56,10 +50,7 @@ public class MarsRoverTest {
 
     @Test
     public void should_move_rover_forward_with_starting_point_at_2_2_facing_south() {
-        Position initialPosition = new Position(2,2);
-        Direction initialDirection = Direction.SOUTH;
-
-        Rover rover = new Rover(initialPosition, initialDirection);
+        Rover rover = initRoverPositionAndDirection(2, 2, Direction.SOUTH);
 
         rover.moveForward();
 
@@ -69,10 +60,7 @@ public class MarsRoverTest {
 
     @Test
     public void should_move_rover_forward_with_starting_point_at_0_2_facing_east() {
-        Position initialPosition = new Position(0,2);
-        Direction initialDirection = Direction.EAST;
-
-        Rover rover = new Rover(initialPosition, initialDirection);
+        Rover rover = initRoverPositionAndDirection(0, 2, Direction.EAST);
 
         rover.moveForward();
 
@@ -81,10 +69,7 @@ public class MarsRoverTest {
 
     @Test
     public void should_move_rover_forward_with_starting_point_at_6_3_facing_west() {
-        Position initialPosition = new Position(6,3);
-        Direction initialDirection = Direction.WEST;
-
-        Rover rover = new Rover(initialPosition, initialDirection);
+        Rover rover = initRoverPositionAndDirection(6, 3, Direction.WEST);
 
         rover.moveForward();
 
@@ -93,10 +78,7 @@ public class MarsRoverTest {
 
     @Test
     public void should_move_rover_backward_with_starting_point_at_3_3_facing_south() {
-        Position initialPosition = new Position(3,3);
-        Direction initialDirection = Direction.SOUTH;
-
-        Rover rover = new Rover(initialPosition, initialDirection);
+        Rover rover = initRoverPositionAndDirection(3, 3, Direction.SOUTH);
 
         rover.moveBackward();
 
@@ -105,10 +87,7 @@ public class MarsRoverTest {
 
     @Test
     public void should_turn_rover_at_left_and_change_his_initial_direction_facing_north_to_west() {
-        Position initialPosition = new Position(3,3);
-        Direction initialDirection = Direction.NORTH;
-
-        Rover rover = new Rover(initialPosition, initialDirection);
+        Rover rover = initRoverPositionAndDirection(3, 3, Direction.NORTH);
 
         rover.turnLeft();
 
@@ -117,14 +96,26 @@ public class MarsRoverTest {
 
     @Test
     public void should_turn_rover_at_left_and_change_his_initial_direction_facing_west_to_south() {
-        Position initialPosition = new Position(3,3);
-        Direction initialDirection = Direction.WEST;
-
-        Rover rover = new Rover(initialPosition, initialDirection);
+        Rover rover = initRoverPositionAndDirection(3, 3, Direction.WEST);
 
         rover.turnLeft();
 
         assertThat(rover.currentDirection()).isEqualTo(Direction.SOUTH);
+    }
+
+    @Test
+    public void should_turn_rover_at_left_and_change_his_initial_direction_facing_south_to_east() {
+        Rover rover = initRoverPositionAndDirection(3, 3, Direction.SOUTH);
+
+        rover.turnLeft();
+
+        assertThat(rover.currentDirection()).isEqualTo(Direction.EAST);
+    }
+
+    private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {
+        Position initialPosition = new Position(x, y);
+
+        return new Rover(initialPosition, direction);
     }
 
 
