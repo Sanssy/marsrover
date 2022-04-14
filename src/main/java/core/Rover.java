@@ -21,4 +21,8 @@ public class Rover {
     public String fullLocation() {
         return ""+position.x()+":"+position.y()+":"+direction.getValue();
     }
+
+    public void moveForward() {
+        this.position = new Position(this.position.x(), this.position.y() +1);
+    }
 }
