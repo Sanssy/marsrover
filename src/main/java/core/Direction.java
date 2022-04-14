@@ -1,7 +1,7 @@
 package core;
 
 public enum Direction {
-    NORTH("N"), SOUTH("S"), EAST("E");
+    NORTH("N"), SOUTH("S"), EAST("E"), WEST("W");
 
     private String value;
 

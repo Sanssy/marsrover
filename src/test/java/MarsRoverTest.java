@@ -79,5 +79,17 @@ public class MarsRoverTest {
         assertThat(rover.currentPosition()).isEqualTo(new Position(1, 2));
     }
 
+    @Test
+    public void should_move_rover_forward_with_starting_point_at_6_3_facing_west() {
+        Position initialPosition = new Position(6,3);
+        Direction initialDirection = Direction.WEST;
+
+        Rover rover = new Rover(initialPosition, initialDirection);
+
+        rover.moveForward();
+
+        assertThat(rover.currentPosition()).isEqualTo(new Position(5, 3));
+    }
+
 
 }
