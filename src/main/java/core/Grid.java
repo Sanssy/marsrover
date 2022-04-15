@@ -4,13 +4,13 @@ public class Grid {
     private int MAX_HEIGHT = 10;
     private int MAX_WIDTH = 10;
 
+    public Grid() {
+
+    }
+
     public Grid(int height, int width) {
         this.MAX_HEIGHT = height;
         this.MAX_WIDTH = width;
-    }
-
-    public Grid() {
-
     }
 
     public Position nextPositionForward(Position currentPosition, Direction direction) {
@@ -18,19 +18,19 @@ public class Grid {
         int y = currentPosition.y();
 
         if (direction.equals(Direction.NORTH)){
-            y = (y + 1) % MAX_HEIGHT;
+            y = applyingUpwardMovement(y, MAX_HEIGHT);
         }
 
         if (direction.equals(Direction.SOUTH)){
-            y = (y > 1) ? (y - 1) : MAX_HEIGHT;
+            y = applyingDownwardMovement(y, MAX_HEIGHT);
         }
 
         if (direction.equals(Direction.WEST)){
-            x = (x > 1) ? (x - 1) : MAX_WIDTH;
+            x = applyingDownwardMovement(x, MAX_WIDTH);
         }
 
         if (direction.equals(Direction.EAST)){
-            x = (x + 1) % MAX_WIDTH;
+            x = applyingUpwardMovement(x, MAX_WIDTH);
         }
 
         return new Position(x, y);
@@ -41,21 +41,29 @@ public class Grid {
         int y = currentPosition.y();
 
         if (direction.equals(Direction.SOUTH)){
-            y = (y + 1) % MAX_HEIGHT;
+            y = applyingUpwardMovement(y, MAX_HEIGHT);
         }
 
         if (direction.equals(Direction.NORTH)){
-            y = (y > 1) ? (y - 1) : MAX_HEIGHT;
+            y = applyingDownwardMovement(y, MAX_HEIGHT);
         }
 
         if (direction.equals(Direction.EAST)){
-            x = (x > 1) ? (x - 1) : MAX_WIDTH;
+            x = applyingDownwardMovement(x, MAX_WIDTH);
         }
 
         if (direction.equals(Direction.WEST)){
-            x = (x + 1) % MAX_WIDTH;
+            x = applyingUpwardMovement(x, MAX_WIDTH);
         }
 
         return new Position(x, y);
+    }
+
+    private int applyingDownwardMovement(int value, int max_side) {
+        return (value > 1) ? (value - 1) : max_side;
+    }
+
+    private int applyingUpwardMovement(int value, int max_side) {
+        return (value + 1) % max_side;
     }
 }
