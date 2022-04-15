@@ -21,12 +21,6 @@ public class Grid {
         this.obstacles = obstacles;
     }
 
-    public Grid(int MAX_HEIGHT, int MAX_WIDTH, List<Position> obstacles) {
-        this.MAX_HEIGHT = MAX_HEIGHT;
-        this.MAX_WIDTH = MAX_WIDTH;
-        this.obstacles = obstacles;
-    }
-
     public Position nextPositionForward(Position currentPosition, Direction direction) {
         int x = currentPosition.x();
         int y = currentPosition.y();

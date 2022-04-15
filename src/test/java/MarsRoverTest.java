@@ -204,6 +204,15 @@ public class MarsRoverTest {
         assertThat(rover.currentPosition()).isEqualTo(initialPosition);
     }
 
+    @Test
+    public void should_execute_a_suite_of_instructions() {
+        Rover rover= initRoverPositionAndDirection(3,5, Direction.SOUTH);
+        String[] instructions = "ff".split("");
+        rover.execute(instructions);
+
+        assertThat(rover.currentPosition()).isEqualTo(new Position(3,3));
+    }
+
     private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {
         Position initialPosition = new Position(x, y);
 

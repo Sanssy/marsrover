@@ -1,5 +1,7 @@
 package core;
 
+import java.util.List;
+
 public class Rover {
 
     private Position position;
@@ -47,5 +49,13 @@ public class Rover {
 
     public void turnRight() {
         this.orientation = this.orientation.atRight();
+    }
+
+    public void execute(String[] characters) {
+        for (String characters1 : List.of(characters)) {
+            if (characters1.equals("f")) {
+                this.moveForward();
+            }
+        }
     }
 }
