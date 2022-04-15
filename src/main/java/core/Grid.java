@@ -25,6 +25,10 @@ public class Grid {
             x = MAX_WIDTH + 1;
         }
 
+        if (direction.equals(Direction.EAST)){
+            x = 0;
+        }
+
         return new Position(x, y);
     }
 }
