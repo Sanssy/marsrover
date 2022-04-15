@@ -50,4 +50,8 @@ public class Rover {
     public void turnLeft() {
         this.orientation = this.orientation.atLeft();
     }
+
+    public void turnRight() {
+        this.orientation = this.orientation.atRight();
+    }
 }
