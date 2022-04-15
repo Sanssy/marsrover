@@ -111,6 +111,18 @@ public class MarsRoverTest {
         assertThat(rover.currentOrientation()).isEqualTo(Orientations.build(Direction.EAST));
     }
 
+    @Test
+    public void should_reach_the_south_edge_from_the_north_edge_position() {
+        Grid grid = new Grid(5,5);
+        Position initialPosition = new Position(3,5);
+
+        Rover rover = new Rover(initialPosition, Direction.NORTH, grid);
+
+        rover.move();
+
+        assertThat(rover.currentPosition()).isEqualTo(new Position(3, 1));
+    }
+
     private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {
         Position initialPosition = new Position(x, y);
 

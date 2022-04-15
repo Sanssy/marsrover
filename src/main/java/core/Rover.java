@@ -7,6 +7,7 @@ public class Rover {
     private Position position;
     private Direction direction;
     private Orientation orientation;
+    private Grid grid;
 
     static EnumMap<Direction, Vector> movingRules;
 
@@ -25,6 +26,14 @@ public class Rover {
         this.orientation = Orientations.build(direction);
     }
 
+    public Rover(Position position, Direction direction, Grid grid) {
+        this();
+        this.position = position;
+        this.direction = direction;
+        this.orientation = Orientations.build(direction);
+        this.grid = grid;
+    }
+
     public Position currentPosition() {
         return this.position;
     }
@@ -35,6 +44,12 @@ public class Rover {
 
     public Orientation currentOrientation() {
         return this.orientation;
+    }
+
+    public void move() {
+        Position nextPosition = this.grid.nextPositionFor(this.position, direction);
+        Vector vector = movingRules.get(this.direction);
+        this.position = nextPosition.translate(vector);
     }
 
     public void moveForward() {
