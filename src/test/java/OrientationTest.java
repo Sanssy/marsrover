@@ -17,4 +17,17 @@ public class OrientationTest {
         expected = expected.atLeft();
         Assertions.assertThat(expected).isEqualTo(Orientations.build(Direction.SOUTH));
     }
+
+    @Test
+    public void should_turns_at_right_from_north_till_returning_at_north() {
+        Orientation orientation= Orientations.build(Direction.NORTH);
+        Orientation expected = orientation.atRight();
+        Assertions.assertThat(expected).isEqualTo(Orientations.build(Direction.WEST));
+        expected = expected.atRight();
+        Assertions.assertThat(expected).isEqualTo(Orientations.build(Direction.SOUTH));
+        expected = expected.atRight();
+        Assertions.assertThat(expected).isEqualTo(Orientations.build(Direction.EAST));
+        expected = expected.atRight();
+        Assertions.assertThat(expected).isEqualTo(Orientations.build(Direction.NORTH));
+    }
 }

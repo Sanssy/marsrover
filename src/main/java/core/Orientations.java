@@ -24,6 +24,10 @@ public class Orientations {
         public Orientation atLeft() {
             return new East();
         }
+
+        public Orientation atRight() {
+            return new West();
+        }
     }
 
     private record East() implements Orientation {
@@ -31,17 +35,29 @@ public class Orientations {
         public Orientation atLeft() {
             return new South();
         }
+
+        public Orientation atRight() {
+            return new North();
+        }
     }
 
     private record South() implements Orientation {
 
         public Orientation atLeft() { return new West(); }
+
+        public Orientation atRight() {
+            return new East();
+        }
     }
 
     private record West() implements Orientation {
 
         public Orientation atLeft() {
             return new North();
+        }
+
+        public Orientation atRight() {
+            return new South();
         }
     }
 }
