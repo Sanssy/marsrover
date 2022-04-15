@@ -1,6 +1,4 @@
-import core.Direction;
-import core.Position;
-import core.Rover;
+import core.*;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,15 +26,6 @@ public class MarsRoverTest {
         Direction expected = rover.currentDirection();
 
         assertThat(expected).isEqualTo(initialDirection);
-    }
-
-    @Test
-    public void should_inform_about_rover_full_location() {
-        Rover rover = initRoverPositionAndDirection(2, 1, Direction.SOUTH);
-
-        String expected = rover.fullLocation();
-
-        assertThat(expected).isEqualTo("2:1:S");
     }
 
     @Test
@@ -86,39 +75,40 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void should_turn_rover_at_left_and_change_his_initial_direction_facing_north_to_west() {
+    public void should_turn_rover_at_left_and_change_his_orientation_facing_north_to_west() {
         Rover rover = initRoverPositionAndDirection(3, 3, Direction.NORTH);
 
         rover.turnLeft();
 
-        assertThat(rover.currentDirection()).isEqualTo(Direction.WEST);
+        assertThat(rover.currentOrientation()).isEqualTo(Orientations.build(Direction.EAST));
     }
 
     @Test
-    public void should_turn_rover_at_left_and_change_his_initial_direction_facing_west_to_south() {
+    public void should_turn_rover_at_left_and_change_his_orientation_facing_west_to_north() {
         Rover rover = initRoverPositionAndDirection(3, 3, Direction.WEST);
 
         rover.turnLeft();
 
-        assertThat(rover.currentDirection()).isEqualTo(Direction.SOUTH);
+        assertThat(rover.currentOrientation()).isEqualTo(Orientations.build(Direction.NORTH));
     }
 
     @Test
-    public void should_turn_rover_at_left_and_change_his_initial_direction_facing_south_to_east() {
+    public void should_turn_rover_at_right_and_change_his_orientation_facing_south_to_east() {
         Rover rover = initRoverPositionAndDirection(3, 3, Direction.SOUTH);
 
         rover.turnLeft();
 
-        assertThat(rover.currentDirection()).isEqualTo(Direction.EAST);
+        assertThat(rover.currentOrientation()).isEqualTo(Orientations.build(Direction.WEST));
     }
 
     @Test
-    public void should_turn_rover_at_left_and_change_his_initial_direction_facing_east_to_north() {
-        Rover rover = initRoverPositionAndDirection(3, 3, Direction.EAST);
+    public void should_turn_rover_at_left_and_change_his_orientation_facing_east_to_north() {
+        Position initialPosition = new Position(2, 4);
+        Rover rover = new Rover(initialPosition, Direction.EAST);
 
         rover.turnLeft();
 
-        assertThat(rover.currentDirection()).isEqualTo(Direction.NORTH);
+        assertThat(rover.currentOrientation()).isEqualTo(Orientations.build(Direction.SOUTH));
     }
 
     private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {

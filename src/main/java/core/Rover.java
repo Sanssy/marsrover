@@ -6,6 +6,7 @@ public class Rover {
 
     private Position position;
     private Direction direction;
+    private Orientation orientation;
 
     static EnumMap<Direction, Vector> movingRules;
 
@@ -17,11 +18,11 @@ public class Rover {
         movingRules.put(Direction.WEST, new Vector(-1, 0));
     }
 
-
     public Rover(Position position, Direction direction) {
         this();
         this.position = position;
         this.direction = direction;
+        this.orientation = Orientations.build(direction);
     }
 
     public Position currentPosition() {
@@ -32,8 +33,8 @@ public class Rover {
         return this.direction;
     }
 
-    public String fullLocation() {
-        return ""+position.x()+":"+position.y()+":"+direction.getValue();
+    public Orientation currentOrientation() {
+        return this.orientation;
     }
 
     public void moveForward() {
@@ -47,14 +48,6 @@ public class Rover {
     }
 
     public void turnLeft() {
-        if (this.direction.equals(Direction.EAST)){
-            this.direction = Direction.NORTH;
-        } else if (this.direction.equals(Direction.SOUTH)) {
-            this.direction = Direction.EAST;
-        } else if (this.direction.equals(Direction.WEST)) {
-            this.direction = Direction.SOUTH;
-        } else {
-            this.direction = Direction.WEST;
-        }
+        this.orientation = this.orientation.atLeft();
     }
 }
