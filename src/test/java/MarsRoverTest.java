@@ -1,6 +1,9 @@
 import core.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MarsRoverTest {
@@ -169,6 +172,21 @@ public class MarsRoverTest {
         rover.moveForward();
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(7, 5));
+    }
+
+    @Test
+    public void should_stop_when_encountering_obstacle() {
+        List<Position> obstacles = new ArrayList<>();
+        Position rock = new Position(4, 7);
+        obstacles.add(rock);
+
+        Grid grid = new Grid(obstacles);
+        Position initialPosition = new Position(3, 7);
+        Rover rover = new Rover(initialPosition, Direction.EAST, grid);
+
+        rover.moveForward();
+
+        assertThat(rover.currentPosition()).isEqualTo(initialPosition);
     }
 
     private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {
