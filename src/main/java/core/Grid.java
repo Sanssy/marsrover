@@ -17,6 +17,10 @@ public class Grid {
             y = 0;
         }
 
+        if (direction.equals(Direction.SOUTH)){
+            y = MAX_HEIGHT + 1;
+        }
+
         return new Position(x, y);
     }
 }
