@@ -21,6 +21,10 @@ public class Grid {
             y = MAX_HEIGHT + 1;
         }
 
+        if (direction.equals(Direction.WEST)){
+            x = MAX_WIDTH + 1;
+        }
+
         return new Position(x, y);
     }
 }
