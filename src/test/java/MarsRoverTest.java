@@ -118,7 +118,7 @@ public class MarsRoverTest {
 
         Rover rover = new Rover(initialPosition, Direction.NORTH, grid);
 
-        rover.move();
+        rover.moveForward();
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(3, 1));
     }
@@ -130,7 +130,7 @@ public class MarsRoverTest {
 
         Rover rover = new Rover(initialPosition, Direction.SOUTH, grid);
 
-        rover.move();
+        rover.moveForward();
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(3, 7));
     }
@@ -142,7 +142,7 @@ public class MarsRoverTest {
 
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        rover.move();
+        rover.moveForward();
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(7, 1));
     }
@@ -154,9 +154,21 @@ public class MarsRoverTest {
 
         Rover rover = new Rover(initialPosition, Direction.EAST, grid);
 
-        rover.move();
+        rover.moveForward();
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(1, 5));
+    }
+
+    @Test
+    public void should_move_forward_from_the_west_position() {
+        Grid grid = new Grid(8,8);
+        Position initialPosition = new Position(8,5);
+
+        Rover rover = new Rover(initialPosition, Direction.WEST, grid);
+
+        rover.moveForward();
+
+        assertThat(rover.currentPosition()).isEqualTo(new Position(7, 5));
     }
 
     private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {

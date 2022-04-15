@@ -1,33 +1,20 @@
 package core;
 
-import java.util.EnumMap;
-
 public class Rover {
 
     private Position position;
-    private Direction direction;
+    private final Direction direction;
     private Orientation orientation;
-    private Grid grid;
-
-    static EnumMap<Direction, Vector> movingRules;
-
-    Rover() {
-        movingRules = new EnumMap<>(Direction.class);
-        movingRules.put(Direction.NORTH, new Vector(0, 1));
-        movingRules.put(Direction.EAST, new Vector(1, 0));
-        movingRules.put(Direction.SOUTH, new Vector(0, -1));
-        movingRules.put(Direction.WEST, new Vector(-1, 0));
-    }
+    private final Grid grid;
 
     public Rover(Position position, Direction direction) {
-        this();
+        this.grid = new Grid();
         this.position = position;
         this.direction = direction;
         this.orientation = Orientations.build(direction);
     }
 
     public Rover(Position position, Direction direction, Grid grid) {
-        this();
         this.position = position;
         this.direction = direction;
         this.orientation = Orientations.build(direction);
@@ -46,20 +33,12 @@ public class Rover {
         return this.orientation;
     }
 
-    public void move() {
-        Position nextPosition = this.grid.nextPositionFor(this.position, direction);
-        Vector vector = movingRules.get(this.direction);
-        this.position = nextPosition.translate(vector);
-    }
-
     public void moveForward() {
-        Vector vector = movingRules.get(this.direction);
-        this.position = this.position.translate(vector);
+        this.position = this.grid.nextPositionForward(this.position, direction);
     }
 
     public void moveBackward() {
-        Vector vector = movingRules.get(this.direction);
-        this.position = this.position.translate(vector.reverse());
+        this.position = this.grid.nextPositionBackward(this.position, direction);
     }
 
     public void turnLeft() {

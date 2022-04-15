@@ -1,32 +1,59 @@
 package core;
 
 public class Grid {
-    private final int MAX_HEIGHT;
-    private final int MAX_WIDTH;
+    private int MAX_HEIGHT = 10;
+    private int MAX_WIDTH = 10;
 
     public Grid(int height, int width) {
         this.MAX_HEIGHT = height;
         this.MAX_WIDTH = width;
     }
 
-    public Position nextPositionFor(Position position, Direction direction) {
-        int x = position.x();
-        int y = position.y();
+    public Grid() {
+
+    }
+
+    public Position nextPositionForward(Position currentPosition, Direction direction) {
+        int x = currentPosition.x();
+        int y = currentPosition.y();
 
         if (direction.equals(Direction.NORTH)){
-            y = 0;
+            y = (y + 1) % MAX_HEIGHT;
         }
 
         if (direction.equals(Direction.SOUTH)){
-            y = MAX_HEIGHT + 1;
+            y = (y > 1) ? (y - 1) : MAX_HEIGHT;
         }
 
         if (direction.equals(Direction.WEST)){
-            x = MAX_WIDTH + 1;
+            x = (x > 1) ? (x - 1) : MAX_WIDTH;
         }
 
         if (direction.equals(Direction.EAST)){
-            x = 0;
+            x = (x + 1) % MAX_WIDTH;
+        }
+
+        return new Position(x, y);
+    }
+
+    public Position nextPositionBackward(Position currentPosition, Direction direction) {
+        int x = currentPosition.x();
+        int y = currentPosition.y();
+
+        if (direction.equals(Direction.SOUTH)){
+            y = (y + 1) % MAX_HEIGHT;
+        }
+
+        if (direction.equals(Direction.NORTH)){
+            y = (y > 1) ? (y - 1) : MAX_HEIGHT;
+        }
+
+        if (direction.equals(Direction.EAST)){
+            x = (x > 1) ? (x - 1) : MAX_WIDTH;
+        }
+
+        if (direction.equals(Direction.WEST)){
+            x = (x + 1) % MAX_WIDTH;
         }
 
         return new Position(x, y);
