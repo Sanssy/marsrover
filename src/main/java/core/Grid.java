@@ -47,11 +47,7 @@ public class Grid {
             x = applyingUpwardMovement(x, MAX_WIDTH);
         }
 
-        Position nextPosition = new Position(x, y);
-
-        return this.obstacles.contains(nextPosition)
-                ? currentPosition
-                : nextPosition;
+        return nextPosition(currentPosition, x, y);
     }
 
     public Position nextPositionBackward(Position currentPosition, Direction direction) {
@@ -74,7 +70,15 @@ public class Grid {
             x = applyingUpwardMovement(x, MAX_WIDTH);
         }
 
-        return new Position(x, y);
+        return nextPosition(currentPosition, x, y);
+    }
+
+    private Position nextPosition(Position currentPosition, int x, int y) {
+        Position nextPosition = new Position(x, y);
+
+        return this.obstacles.contains(nextPosition)
+                ? currentPosition
+                : nextPosition;
     }
 
     private int applyingDownwardMovement(int value, int max_side) {

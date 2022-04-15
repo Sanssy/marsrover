@@ -189,6 +189,21 @@ public class MarsRoverTest {
         assertThat(rover.currentPosition()).isEqualTo(initialPosition);
     }
 
+    @Test
+    public void should_stop_when_encountering_obstacle_while_trying_to_move_backward() {
+        List<Position> obstacles = new ArrayList<>();
+        Position rock = new Position(0, 4);
+        obstacles.add(rock);
+
+        Grid grid = new Grid(obstacles);
+        Position initialPosition = new Position(9, 4);
+        Rover rover = new Rover(initialPosition, Direction.WEST, grid);
+
+        rover.moveBackward();
+
+        assertThat(rover.currentPosition()).isEqualTo(initialPosition);
+    }
+
     private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {
         Position initialPosition = new Position(x, y);
 
