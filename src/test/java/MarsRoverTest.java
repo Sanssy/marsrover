@@ -1,4 +1,5 @@
 import core.*;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -7,6 +8,18 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MarsRoverTest {
+
+    private static Instruction f,r,l,b;
+    private static Commands commands;
+
+    @BeforeAll
+    static void initCommands() {
+        commands = new Commands();
+        f = new Instruction('f');
+        r = new Instruction('r');
+        l = new Instruction('l');
+        b = new Instruction('b');
+    }
 
     @Test
     public void should_render_rover_initial_position() {
@@ -78,7 +91,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void should_turn_rover_at_left_and_change_his_orientation_facing_north_to_west() {
+    public void should_turn_rover_at_left_and_change_his_direction_facing_north_to_west() {
         Rover rover = initRoverPositionAndDirection(3, 3, Direction.NORTH);
 
         rover.turnLeft();
@@ -87,7 +100,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void should_turn_rover_at_left_and_change_his_orientation_facing_west_to_north() {
+    public void should_turn_rover_at_left_and_change_his_direction_facing_west_to_north() {
         Rover rover = initRoverPositionAndDirection(3, 3, Direction.WEST);
 
         rover.turnLeft();
@@ -96,7 +109,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void should_turn_rover_at_left_and_change_his_orientation_facing_east_to_north() {
+    public void should_turn_rover_at_left_and_change_his_direction_facing_east_to_north() {
         Position initialPosition = new Position(2, 4);
         Rover rover = new Rover(initialPosition, Direction.EAST);
 
@@ -106,7 +119,7 @@ public class MarsRoverTest {
     }
 
     @Test
-    public void should_turn_rover_at_right_and_change_his_orientation_facing_south_to_east() {
+    public void should_turn_rover_at_right_and_change_his_direction_facing_south_to_east() {
         Rover rover = initRoverPositionAndDirection(3, 3, Direction.SOUTH);
 
         rover.turnRight();
@@ -207,8 +220,8 @@ public class MarsRoverTest {
     @Test
     public void should_execute_a_suite_of_instructions() {
         Rover rover= initRoverPositionAndDirection(3,5, Direction.SOUTH);
-        String[] instructions = "ff".split("");
-        rover.execute(instructions);
+        commands.generate(f,f);
+        rover.execute(commands);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(3,3));
     }
@@ -216,10 +229,11 @@ public class MarsRoverTest {
     @Test
     public void should_execute_a_complex_suite_of_instructions() {
         Rover rover= initRoverPositionAndDirection(3,5, Direction.NORTH);
-        String[] instructions = "ff".split("");
-        rover.execute(instructions);
 
-        assertThat(rover.currentPosition()).isEqualTo(new Position(3,7));
+        commands.generate(f,f,r,f,f,r,f,f,r,f,f); // square
+        rover.execute(commands);
+
+        assertThat(rover.currentPosition()).isEqualTo(new Position(3,5));
     }
 
     private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {
