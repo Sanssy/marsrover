@@ -5,8 +5,8 @@ import java.util.List;
 public class Rover {
 
     private Position position;
-    private final Direction direction;
-    private Orientation orientation;
+    private Direction direction;
+    private final Orientation orientation;
     private final Grid grid;
 
     public Rover(Position position, Direction direction) {
@@ -36,7 +36,7 @@ public class Rover {
     }
 
     public void moveForward() {
-        this.position = this.grid.nextPositionForward(this.position, direction);
+        this.position = this.grid.nextPositionForward(this.position, this.direction);
     }
 
     public void moveBackward() {
@@ -44,17 +44,26 @@ public class Rover {
     }
 
     public void turnLeft() {
-        this.orientation = this.orientation.atLeft();
+        this.direction = this.direction.atLeft();
     }
 
     public void turnRight() {
-        this.orientation = this.orientation.atRight();
+        this.direction = this.direction.atRight();
     }
 
     public void execute(String[] characters) {
         for (String characters1 : List.of(characters)) {
             if (characters1.equals("f")) {
                 this.moveForward();
+            }
+            if (characters1.equals("b")) {
+                this.moveBackward();
+            }
+            if (characters1.equals("l")) {
+                this.turnLeft();
+            }
+            if (characters1.equals("r")) {
+                this.turnRight();
             }
         }
     }

@@ -83,7 +83,7 @@ public class MarsRoverTest {
 
         rover.turnLeft();
 
-        assertThat(rover.currentOrientation()).isEqualTo(Orientations.build(Direction.EAST));
+        assertThat(rover.currentDirection()).isEqualTo(Direction.EAST);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class MarsRoverTest {
 
         rover.turnLeft();
 
-        assertThat(rover.currentOrientation()).isEqualTo(Orientations.build(Direction.NORTH));
+        assertThat(rover.currentDirection()).isEqualTo(Direction.NORTH);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class MarsRoverTest {
 
         rover.turnLeft();
 
-        assertThat(rover.currentOrientation()).isEqualTo(Orientations.build(Direction.SOUTH));
+        assertThat(rover.currentDirection()).isEqualTo(Direction.SOUTH);
     }
 
     @Test
@@ -111,7 +111,7 @@ public class MarsRoverTest {
 
         rover.turnRight();
 
-        assertThat(rover.currentOrientation()).isEqualTo(Orientations.build(Direction.EAST));
+        assertThat(rover.currentDirection()).isEqualTo(Direction.EAST);
     }
 
     @Test
@@ -211,6 +211,15 @@ public class MarsRoverTest {
         rover.execute(instructions);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(3,3));
+    }
+
+    @Test
+    public void should_execute_a_complex_suite_of_instructions() {
+        Rover rover= initRoverPositionAndDirection(3,5, Direction.NORTH);
+        String[] instructions = "ff".split("");
+        rover.execute(instructions);
+
+        assertThat(rover.currentPosition()).isEqualTo(new Position(3,7));
     }
 
     private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {
