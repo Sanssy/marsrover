@@ -14,6 +14,7 @@ public record Instruction(char instruction) {
         char value;
 
         validInstruction(char value) {
+            this.value = value;
         }
     }
 
