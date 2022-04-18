@@ -45,7 +45,7 @@ public class ObstacleTest {
     }
 
     @Test
-    public void should_report_an_obstacle_when_encountered() {
+    public void should_make_a_state_report_when_encountered_an_obstacle() {
         List<Position> obstacles = new ArrayList<>();
         Position rock = new Position(0, 4);
         obstacles.add(rock);
@@ -55,7 +55,12 @@ public class ObstacleTest {
         Position initialPosition = new Position(9, 4);
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        assertThat(rover.state()).isEqualTo("Command execution aborted due to an obstacle, my current position is " + rover.currentPosition());
+        rover.moveBackward();
+
+        assertThat(rover.state()).isEqualTo(
+                "Command execution aborted due to an obstacle. " +
+                "My current position is " + rover.currentPosition() +
+                " facing " + Direction.WEST + " direction");
     }
 
 }

@@ -57,6 +57,7 @@ public class Rover {
     }
 
     public String state() {
-        return "Command execution aborted due to an obstacle, my current position is " + this.currentPosition();
+        return "Command execution aborted due to an obstacle. My current position is "
+                + this.currentPosition() + " facing " + this.currentDirection().name() + " direction";
     }
 }
