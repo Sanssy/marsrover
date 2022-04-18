@@ -15,10 +15,10 @@ public class MarsRoverTest {
     @BeforeAll
     static void initCommands() {
         commands = new Commands();
-        f = new Instruction('f');
-        r = new Instruction('r');
-        l = new Instruction('l');
-        b = new Instruction('b');
+        f = new Instruction('f'); // forward
+        r = new Instruction('r'); // right
+        l = new Instruction('l'); // left
+        b = new Instruction('b'); // backward
     }
 
     @Test
@@ -221,7 +221,7 @@ public class MarsRoverTest {
     public void should_execute_a_suite_of_instructions() {
         Rover rover= initRoverPositionAndDirection(3,5, Direction.SOUTH);
         commands.generate(f,f);
-        rover.execute(commands);
+        rover.apply(commands);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(3,3));
     }
@@ -231,10 +231,33 @@ public class MarsRoverTest {
         Rover rover= initRoverPositionAndDirection(3,5, Direction.NORTH);
 
         commands.generate(f,f,r,f,f,r,f,f,r,f,f); // square
-        rover.execute(commands);
+        rover.apply(commands);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(3,5));
     }
+
+    @Test
+    public void should_report_an_obstacle_when_encountered() {
+        List<Position> obstacles = new ArrayList<>();
+        Position littleRock = new Position(0, 4);
+        Position mediumRock = new Position(1, 4);
+        Position bigRock = new Position(2, 4);
+        obstacles.add(littleRock);
+        obstacles.add(mediumRock);
+        obstacles.add(bigRock);
+
+        Grid grid = new Grid(obstacles);
+
+
+        Position initialPosition = new Position(5, 4);
+        Rover rover = new Rover(initialPosition, Direction.WEST, grid);
+        commands.generate(l,l,f,f,f,f,f,f,f,f);
+        rover.apply(commands);
+
+        assertThat(rover.state()).isEqualTo("Command execution aborted due to an obstacle, my current position is " + rover.currentPosition());
+    }
+
+
 
     private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {
         Position initialPosition = new Position(x, y);

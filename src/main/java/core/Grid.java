@@ -25,21 +25,13 @@ public class Grid {
         int x = currentPosition.x();
         int y = currentPosition.y();
 
-        if (direction.equals(Direction.NORTH)){
-            y = applyingUpwardMovement(y, MAX_HEIGHT);
-        }
+        y = translateUpward(direction, y, Direction.NORTH, MAX_HEIGHT);
 
-        if (direction.equals(Direction.SOUTH)){
-            y = applyingDownwardMovement(y, MAX_HEIGHT);
-        }
+        y = translateDownward(direction, y, Direction.SOUTH, MAX_HEIGHT);
 
-        if (direction.equals(Direction.WEST)){
-            x = applyingDownwardMovement(x, MAX_WIDTH);
-        }
+        x = translateDownward(direction, x, Direction.WEST, MAX_WIDTH);
 
-        if (direction.equals(Direction.EAST)){
-            x = applyingUpwardMovement(x, MAX_WIDTH);
-        }
+        x = translateUpward(direction, x, Direction.EAST, MAX_WIDTH);
 
         return nextPosition(currentPosition, x, y);
     }
@@ -48,29 +40,33 @@ public class Grid {
         int x = currentPosition.x();
         int y = currentPosition.y();
 
-        if (direction.equals(Direction.SOUTH)){
-            y = applyingUpwardMovement(y, MAX_HEIGHT);
-        }
+        y = translateUpward(direction, y, Direction.SOUTH, MAX_HEIGHT);
 
-        if (direction.equals(Direction.NORTH)){
-            y = applyingDownwardMovement(y, MAX_HEIGHT);
-        }
+        y = translateDownward(direction, y, Direction.NORTH, MAX_HEIGHT);
 
-        if (direction.equals(Direction.EAST)){
-            x = applyingDownwardMovement(x, MAX_WIDTH);
-        }
+        x = translateDownward(direction, x, Direction.EAST, MAX_WIDTH);
 
-        if (direction.equals(Direction.WEST)){
-            x = applyingUpwardMovement(x, MAX_WIDTH);
-        }
+        x = translateUpward(direction, x, Direction.WEST, MAX_WIDTH);
 
         return nextPosition(currentPosition, x, y);
     }
 
-    private Position nextPosition(Position currentPosition, int x, int y) {
-        Position nextPosition = new Position(x, y);
+    private int translateDownward(Direction direction, int coordinate, Direction expected, int grid_max_side) {
+        if (direction.equals(expected))
+            coordinate = applyingDownwardMovement(coordinate, grid_max_side);
+        return coordinate;
+    }
 
-        return this.obstacles.contains(nextPosition)
+    private int translateUpward(Direction direction, int coordinate, Direction expected, int grid_max_side) {
+        if (direction.equals(expected))
+            coordinate = applyingUpwardMovement(coordinate, grid_max_side);
+        return coordinate;
+    }
+
+    private Position nextPosition(Position currentPosition, int x, int y) {
+        Position nextPosition = Position.generate(x, y);
+
+         return this.obstacles.contains(nextPosition)
                 ? currentPosition
                 : nextPosition;
     }

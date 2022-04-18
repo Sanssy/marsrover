@@ -1,7 +1,5 @@
 package core;
 
-import java.util.List;
-
 public class Rover {
 
     private Position position;
@@ -44,7 +42,7 @@ public class Rover {
         this.direction = this.direction.atRight();
     }
 
-    public void execute(Commands commands) {
+    public void apply(Commands commands) {
         for (Instruction instruction : commands.execute()) {
             switch (instruction.compute()) {
                 case 'f' -> this.moveForward();
@@ -52,14 +50,13 @@ public class Rover {
                 case 'l' -> this.turnLeft();
                 case 'r' -> this.turnRight();
                 default -> {
-                    this.report();
                     return;
                 }
             }
         }
     }
 
-    private void report() {
-        System.out.println("Unknown instruction");
+    public String state() {
+        return "Command execution aborted due to an obstacle, my current position is " + this.currentPosition();
     }
 }
