@@ -1,7 +1,7 @@
 package core;
 
 public enum Direction {
-    NORTH() {
+    SOUTH() {
         @Override
         public Direction atLeft() {
             return Direction.EAST;
@@ -11,7 +11,7 @@ public enum Direction {
         public Direction atRight() {
             return Direction.WEST;
         }
-    }, SOUTH {
+    }, NORTH {
         @Override
         public Direction atLeft() {
             return Direction.WEST;
@@ -21,7 +21,7 @@ public enum Direction {
         public Direction atRight() {
             return Direction.EAST;
         }
-    }, EAST {
+    }, WEST {
         @Override
         public Direction atLeft() {
             return Direction.SOUTH;
@@ -31,7 +31,7 @@ public enum Direction {
         public Direction atRight() {
             return Direction.NORTH;
         }
-    }, WEST {
+    }, EAST {
         @Override
         public Direction atLeft() {
             return Direction.NORTH;

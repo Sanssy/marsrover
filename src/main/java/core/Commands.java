@@ -1,21 +1,21 @@
 package core;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Commands {
-    private List<Instruction> instructions;
+    private final List<Instruction> instructions;
 
-    public Commands() {
-        this.instructions = new ArrayList<>();
+    public Commands(Character... chars) {
+        this.instructions = of(chars);
     }
 
     public List<Instruction> execute() {
         return this.instructions;
     }
 
-    public void generate(Instruction... instructions) {
-        this.instructions = Arrays.stream(instructions).filter(Instruction::verify).toList();
+    private static List<Instruction> of(Character... chars) {
+        return Arrays.stream(chars).map(Instruction::new).filter(Instruction::verify).collect(Collectors.toList());
     }
 }

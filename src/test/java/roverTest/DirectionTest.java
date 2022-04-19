@@ -15,7 +15,7 @@ public class DirectionTest {
 
         rover.turnLeft();
 
-        assertThat(rover.currentDirection()).isEqualTo(Direction.EAST);
+        assertThat(rover.currentDirection()).isEqualTo(Direction.WEST);
     }
 
     @Test
@@ -24,7 +24,7 @@ public class DirectionTest {
 
         rover.turnLeft();
 
-        assertThat(rover.currentDirection()).isEqualTo(Direction.NORTH);
+        assertThat(rover.currentDirection()).isEqualTo(Direction.SOUTH);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class DirectionTest {
 
         rover.turnLeft();
 
-        assertThat(rover.currentDirection()).isEqualTo(Direction.SOUTH);
+        assertThat(rover.currentDirection()).isEqualTo(Direction.NORTH);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class DirectionTest {
 
         rover.turnRight();
 
-        assertThat(rover.currentDirection()).isEqualTo(Direction.EAST);
+        assertThat(rover.currentDirection()).isEqualTo(Direction.WEST);
     }
 
     private Rover initRoverPositionAndDirection(int x, int y, Direction direction) {
