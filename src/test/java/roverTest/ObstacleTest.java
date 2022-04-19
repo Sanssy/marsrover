@@ -32,7 +32,7 @@ public class ObstacleTest {
     @Test
     public void should_stop_when_encountering_obstacle_while_trying_to_move_backward() {
         List<Position> obstacles = new ArrayList<>();
-        Position rock = new Position(0, 4);
+        Position rock = new Position(10, 4);
         obstacles.add(rock);
 
         Grid grid = new Grid(obstacles);

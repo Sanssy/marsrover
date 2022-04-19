@@ -22,60 +22,50 @@ public class Grid {
     }
 
     public Position nextPositionForward(Position currentPosition, Direction direction) {
-        int x = currentPosition.x();
-        int y = currentPosition.y();
+        Vector vector = Vector.retrieveForwardTranslationFrom(direction);
 
-        y = translateUpward(direction, y, Direction.NORTH, MAX_HEIGHT);
-
-        y = translateDownward(direction, y, Direction.SOUTH, MAX_HEIGHT);
-
-        x = translateDownward(direction, x, Direction.WEST, MAX_WIDTH);
-
-        x = translateUpward(direction, x, Direction.EAST, MAX_WIDTH);
-
-        return nextPosition(currentPosition, x, y);
+        return nextPosition(currentPosition, vector);
     }
 
     public Position nextPositionBackward(Position currentPosition, Direction direction) {
-        int x = currentPosition.x();
-        int y = currentPosition.y();
+        Vector vector = Vector.retrieveBackwardTranslationFrom(direction);
 
-        y = translateUpward(direction, y, Direction.SOUTH, MAX_HEIGHT);
-
-        y = translateDownward(direction, y, Direction.NORTH, MAX_HEIGHT);
-
-        x = translateDownward(direction, x, Direction.EAST, MAX_WIDTH);
-
-        x = translateUpward(direction, x, Direction.WEST, MAX_WIDTH);
-
-        return nextPosition(currentPosition, x, y);
+        return nextPosition(currentPosition, vector);
     }
 
-    private int translateDownward(Direction direction, int coordinate, Direction expected, int grid_max_side) {
-        if (direction.equals(expected))
-            coordinate = applyingDownwardMovement(coordinate, grid_max_side);
-        return coordinate;
-    }
+    private Position nextPosition(Position currentPosition, Vector vector) {
+        Position nextPosition = currentPosition.translate(vector);
 
-    private int translateUpward(Direction direction, int coordinate, Direction expected, int grid_max_side) {
-        if (direction.equals(expected))
-            coordinate = applyingUpwardMovement(coordinate, grid_max_side);
-        return coordinate;
-    }
+        if (this.xIsOutOfMapPositively(nextPosition)) {
+            nextPosition = Position.generate(currentPosition.x() % MAX_WIDTH, currentPosition.y());
+        } else if (this.xIsOutOfMapNegatively(nextPosition)) {
+            nextPosition = Position.generate(MAX_WIDTH, currentPosition.y());
+        } else if (this.yIsOutOfMapPositively(nextPosition)) {
+            nextPosition = Position.generate(currentPosition.x(), currentPosition.y() % MAX_HEIGHT);
+        } else if (this.yIsOutOfMapNegatively(nextPosition)){
+            nextPosition = Position.generate(currentPosition.x(), MAX_HEIGHT);
+        }
 
-    private Position nextPosition(Position currentPosition, int x, int y) {
-        Position nextPosition = Position.generate(x, y);
-
-         return this.obstacles.contains(nextPosition)
+        return this.obstacles.contains(nextPosition)
                 ? currentPosition
                 : nextPosition;
     }
 
-    private int applyingDownwardMovement(int value, int max_side) {
-        return (value > 1) ? (value - 1) : max_side;
+    private boolean xIsOutOfMapPositively(Position position) {
+        return position.x() > MAX_HEIGHT;
     }
 
-    private int applyingUpwardMovement(int value, int max_side) {
-        return (value + 1) % max_side;
+    private boolean xIsOutOfMapNegatively(Position position) {
+        int MIN_HEIGHT = 0;
+        return position.x() < MIN_HEIGHT;
+    }
+
+    private boolean yIsOutOfMapPositively(Position position) {
+        return position.y() > MAX_WIDTH;
+    }
+
+    private boolean yIsOutOfMapNegatively(Position position) {
+        int MIN_WIDTH = 0;
+        return position.y() < MIN_WIDTH;
     }
 }

@@ -19,13 +19,13 @@ public class EdgeTest {
 
         rover.moveForward();
 
-        assertThat(rover.currentPosition()).isEqualTo(new Position(3, 1));
+        assertThat(rover.currentPosition()).isEqualTo(new Position(3, 0));
     }
 
     @Test
     public void should_reach_the_north_edge_from_the_south_edge_position() {
         Grid grid = new Grid(7,7);
-        Position initialPosition = new Position(3,1);
+        Position initialPosition = new Position(3,0);
 
         Rover rover = new Rover(initialPosition, Direction.SOUTH, grid);
 
@@ -37,7 +37,7 @@ public class EdgeTest {
     @Test
     public void should_reach_the_east_edge_from_the_west_edge_position() {
         Grid grid = new Grid(7,7);
-        Position initialPosition = new Position(1,1);
+        Position initialPosition = new Position(0,1);
 
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
@@ -55,7 +55,7 @@ public class EdgeTest {
 
         rover.moveForward();
 
-        assertThat(rover.currentPosition()).isEqualTo(new Position(1, 5));
+        assertThat(rover.currentPosition()).isEqualTo(new Position(0, 5));
     }
 }
 
