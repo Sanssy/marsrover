@@ -1,5 +1,10 @@
 package core;
 
+import java.util.EnumMap;
+import java.util.Map;
+
+import static core.Instruction.*;
+
 public record Vector(int x, int y) {
 
     private static Vector east() {
@@ -16,22 +21,22 @@ public record Vector(int x, int y) {
     }
     private static Vector abort() { return new Vector(0,0); }
 
-    public static Vector retrieveTranslationFor(Direction direction, Instruction instruction) {
+    private static final Map<Direction, Vector> vectorRules = new EnumMap<>(Direction.class);
 
-        if (instructionAreSettingAt(direction, instruction, Direction.NORTH, Direction.SOUTH))
-            return north();
-        if (instructionAreSettingAt(direction, instruction, Direction.SOUTH, Direction.NORTH))
-            return south();
-        if (instructionAreSettingAt(direction, instruction, Direction.EAST, Direction.WEST))
-            return east();
-        if (instructionAreSettingAt(direction, instruction, Direction.WEST, Direction.EAST))
-            return west();
-        return abort();
+    static {
+        vectorRules.put(Direction.NORTH, north());
+        vectorRules.put(Direction.EAST, east());
+        vectorRules.put(Direction.SOUTH, south());
+        vectorRules.put(Direction.WEST, west());
     }
 
-    private static boolean instructionAreSettingAt(Direction currentDirection, Instruction instruction, Direction directionF, Direction directionB) {
-        return currentDirection.equals(directionF) && instruction.value() == Instruction.ValidInstruction.FORWARD.value ||
-               currentDirection.equals(directionB) && instruction.value() == Instruction.ValidInstruction.BACKWARD.value;
+    public static Vector retrieveTranslationFor(Direction direction, Instruction instruction) {
+
+        Vector vector = vectorRules.get(direction);
+
+        return ValidInstruction.FORWARD.value == instruction.value() ?
+                vector : ValidInstruction.BACKWARD.value == instruction.value() ?
+                vector.reverse() : abort();
     }
 
     public Vector reverse() {
