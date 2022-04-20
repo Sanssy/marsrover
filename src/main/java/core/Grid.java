@@ -25,10 +25,10 @@ public class Grid {
         this.obstacles = obstacles;
     }
 
-    public Position nextPosition(Position position, Direction direction, Instruction instruction) {
+    public Position nextPosition(Position currentPosition, Direction direction, Instruction instruction) {
         Vector vector = Vector.retrieveTranslationFor(direction, instruction);
-        Position nextPosition = position.predict(vector, MAX_WIDTH, MAX_HEIGHT, MIN_WIDTH, MIN_HEIGHT);
+        Position nextPosition = currentPosition.predict(vector, MAX_WIDTH, MAX_HEIGHT, MIN_WIDTH, MIN_HEIGHT);
 
-        return this.obstacles.contains(nextPosition) ? position : nextPosition;
+        return this.obstacles.contains(nextPosition) ? currentPosition : nextPosition;
     }
 }
