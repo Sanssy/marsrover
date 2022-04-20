@@ -18,42 +18,32 @@ public class Rover {
         this.grid = grid;
     }
 
+    public void apply(Commands commands) {
+        for (Instruction instruction : commands.execute()) {
+            switch (instruction.value()) {
+                case 'f', 'b' -> this.move(instruction);
+                case 'l', 'r' -> this.turn(instruction);
+                default -> {
+                    return;
+                }
+            }
+        }
+    }
+
+    public void move(Instruction instruction) {
+        this.position = this.grid.nextPosition(this.position, this.direction, instruction);
+    }
+
+    public void turn(Instruction instruction) {
+        this.direction = this.direction.turn(instruction);
+    }
+
     public Position currentPosition() {
         return this.position;
     }
 
     public Direction currentDirection() {
         return this.direction;
-    }
-
-    public void moveForward() {
-        this.position = this.grid.nextPositionForward(this.position, this.direction);
-    }
-
-    public void moveBackward() {
-        this.position = this.grid.nextPositionBackward(this.position, this.direction);
-    }
-
-    public void turnLeft() {
-        this.direction = this.direction.atLeft();
-    }
-
-    public void turnRight() {
-        this.direction = this.direction.atRight();
-    }
-
-    public void apply(Commands commands) {
-        for (Instruction instruction : commands.execute()) {
-            switch (instruction.compute()) {
-                case 'f' -> this.moveForward();
-                case 'b' -> this.moveBackward();
-                case 'l' -> this.turnLeft();
-                case 'r' -> this.turnRight();
-                default -> {
-                    return;
-                }
-            }
-        }
     }
 
     public String state() {

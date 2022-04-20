@@ -16,7 +16,6 @@ public class CommandsTest {
         Commands commands = new Commands('#','f','#','#','#','#','#', 'f', 'f');
 
         rover.apply(commands);
-
         assertThat(rover.currentPosition()).isEqualTo(new Position(2,1));
     }
 
@@ -24,8 +23,8 @@ public class CommandsTest {
     public void should_execute_a_complex_suite_of_instructions() {
         Rover rover= initRoverPositionAndDirection(3,5, Direction.NORTH);
         Commands square = new Commands('f','f','r','f','f','r','f','f','r','f','f');
-        rover.apply(square);
 
+        rover.apply(square);
         assertThat(rover.currentPosition()).isEqualTo(new Position(3,5));
     }
 

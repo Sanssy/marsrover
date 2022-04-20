@@ -1,49 +1,67 @@
 package core;
 
 public enum Direction {
-    SOUTH() {
-        @Override
-        public Direction atLeft() {
+    SOUTH {
+        private Direction atLeft() {
             return Direction.EAST;
         }
 
-        @Override
-        public Direction atRight() {
+        private Direction atRight() {
             return Direction.WEST;
+        }
+
+        @Override
+        public Direction turn(Instruction instruction) {
+            if (instruction.value() == Instruction.ValidInstruction.LEFT.value)
+                return this.atLeft();
+            return this.atRight();
         }
     }, NORTH {
-        @Override
-        public Direction atLeft() {
+        private Direction atLeft() {
             return Direction.WEST;
         }
 
-        @Override
-        public Direction atRight() {
+        private Direction atRight() {
             return Direction.EAST;
         }
-    }, WEST {
+
         @Override
-        public Direction atLeft() {
+        public Direction turn(Instruction instruction) {
+            if (instruction.value() == Instruction.ValidInstruction.LEFT.value)
+                return this.atLeft();
+            return this.atRight();
+        }
+    }, WEST {
+        private Direction atLeft() {
             return Direction.SOUTH;
         }
 
-        @Override
-        public Direction atRight() {
+        private Direction atRight() {
             return Direction.NORTH;
+        }
+
+        @Override
+        public Direction turn(Instruction instruction) {
+            if (instruction.value() == Instruction.ValidInstruction.LEFT.value)
+                return this.atLeft();
+            return this.atRight();
         }
     }, EAST {
-        @Override
-        public Direction atLeft() {
+        private Direction atLeft() {
             return Direction.NORTH;
         }
 
-        @Override
-        public Direction atRight() {
+        private Direction atRight() {
             return Direction.SOUTH;
+        }
+
+        @Override
+        public Direction turn(Instruction instruction) {
+            if (instruction.value() == Instruction.ValidInstruction.LEFT.value)
+                return this.atLeft();
+            return this.atRight();
         }
     };
 
-    abstract public Direction atLeft();
-    abstract public Direction atRight();
-
+    public abstract Direction turn(Instruction instruction);
 }

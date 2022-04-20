@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public record Instruction(char instruction) {
 
-    private enum validInstruction {
+    public enum ValidInstruction {
         LEFT('l'),
         RIGHT('r'),
         FORWARD('f'),
@@ -12,16 +12,16 @@ public record Instruction(char instruction) {
 
         char value;
 
-        validInstruction(char value) {
+        ValidInstruction(char value) {
             this.value = value;
         }
     }
 
-    public char compute() {
+    public char value() {
         return this.instruction;
     }
 
     public boolean verify() {
-        return Arrays.stream(validInstruction.values()).anyMatch(validInstruction -> validInstruction.value == this.instruction);
+        return Arrays.stream(ValidInstruction.values()).anyMatch(instruction -> instruction.value == this.instruction);
     }
 }

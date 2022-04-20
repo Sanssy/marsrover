@@ -1,9 +1,6 @@
 package roverTest;
 
-import core.Direction;
-import core.Grid;
-import core.Position;
-import core.Rover;
+import core.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -24,7 +21,9 @@ public class ObstacleTest {
         Position initialPosition = new Position(3, 7);
         Rover rover = new Rover(initialPosition, Direction.EAST, grid);
 
-        rover.moveForward();
+        Instruction forward = new Instruction('f');
+
+        rover.move(forward);
 
         assertThat(rover.currentPosition()).isEqualTo(initialPosition);
     }
@@ -39,7 +38,9 @@ public class ObstacleTest {
         Position initialPosition = new Position(9, 4);
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        rover.moveBackward();
+        Instruction backward = new Instruction('b');
+
+        rover.move(backward);
 
         assertThat(rover.currentPosition()).isEqualTo(initialPosition);
     }
@@ -55,7 +56,9 @@ public class ObstacleTest {
         Position initialPosition = new Position(9, 4);
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        rover.moveBackward();
+        Instruction backward = new Instruction('b');
+
+        rover.move(backward);
 
         assertThat(rover.state()).isEqualTo(
                 "Command execution aborted due to an obstacle. " +
