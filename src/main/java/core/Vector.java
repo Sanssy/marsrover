@@ -3,7 +3,7 @@ package core;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static core.Instruction.*;
+import static core.InstructionHandler.*;
 
 public record Vector(int x, int y) {
 
@@ -34,8 +34,8 @@ public record Vector(int x, int y) {
 
         Vector vector = vectorRules.get(direction);
 
-        return ValidInstruction.FORWARD.value == instruction.value() ?
-                vector : ValidInstruction.BACKWARD.value == instruction.value() ?
+        return Instruction.FORWARD.equals(instruction) ?
+                vector : Instruction.BACKWARD.equals(instruction) ?
                 vector.reverse() : abort();
     }
 

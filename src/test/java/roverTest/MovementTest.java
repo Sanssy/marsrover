@@ -1,25 +1,18 @@
 package roverTest;
 
 import core.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static core.InstructionHandler.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MovementTest {
-
-    private static Instruction forward;
-
-    @BeforeAll
-    static void init_forward_instruction() {
-        forward = new Instruction('f');
-    }
 
     @Test
     public void should_move_rover_forward_with_starting_point_at_0_2() {
         Rover rover = initRoverPositionAndDirection(0, 2, Direction.NORTH);
 
-        rover.move(forward);
+        rover.move(Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(0, 3));
     }
@@ -28,7 +21,7 @@ public class MovementTest {
     public void should_move_rover_forward_with_starting_point_at_2_2_facing_south() {
         Rover rover = initRoverPositionAndDirection(2, 2, Direction.SOUTH);
 
-        rover.move(forward);
+        rover.move(Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(2, 1));
     }
@@ -37,7 +30,7 @@ public class MovementTest {
     public void should_move_rover_forward_with_starting_point_at_0_2_facing_east() {
         Rover rover = initRoverPositionAndDirection(0, 2, Direction.EAST);
 
-        rover.move(forward);
+        rover.move(Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(1, 2));
     }
@@ -46,7 +39,7 @@ public class MovementTest {
     public void should_move_rover_forward_with_starting_point_at_6_3_facing_west() {
         Rover rover = initRoverPositionAndDirection(6, 3, Direction.WEST);
 
-        rover.move(forward);
+        rover.move(Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(5, 3));
     }
@@ -55,7 +48,7 @@ public class MovementTest {
     public void should_move_rover_backward_with_starting_point_at_3_3_facing_south() {
         Rover rover = initRoverPositionAndDirection(3, 3, Direction.SOUTH);
 
-        Instruction backward = new Instruction('b');
+        Instruction backward = Instruction.BACKWARD;
 
         rover.move(backward);
 
@@ -69,7 +62,7 @@ public class MovementTest {
 
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        rover.move(forward);
+        rover.move(Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(7, 5));
     }

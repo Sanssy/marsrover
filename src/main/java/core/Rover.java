@@ -1,5 +1,7 @@
 package core;
 
+import static core.InstructionHandler.*;
+
 public class Rover {
 
     private Position position;
@@ -20,12 +22,10 @@ public class Rover {
 
     public void apply(Commands commands) {
         for (Instruction instruction : commands.execute()) {
-            switch (instruction.value()) {
-                case 'f', 'b' -> this.move(instruction);
-                case 'l', 'r' -> this.turn(instruction);
-                default -> {
-                    return;
-                }
+            switch (instruction) {
+                case FORWARD, BACKWARD -> this.move(instruction);
+                case LEFT, RIGHT -> this.turn(instruction);
+                default -> throw new IllegalArgumentException();
             }
         }
     }

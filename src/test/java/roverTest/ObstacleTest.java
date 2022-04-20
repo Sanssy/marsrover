@@ -21,7 +21,7 @@ public class ObstacleTest {
         Position initialPosition = new Position(3, 7);
         Rover rover = new Rover(initialPosition, Direction.EAST, grid);
 
-        Instruction forward = new Instruction('f');
+        InstructionHandler.Instruction forward = InstructionHandler.Instruction.FORWARD;
 
         rover.move(forward);
 
@@ -38,7 +38,7 @@ public class ObstacleTest {
         Position initialPosition = new Position(9, 4);
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        Instruction backward = new Instruction('b');
+        InstructionHandler.Instruction backward = InstructionHandler.Instruction.BACKWARD;
 
         rover.move(backward);
 
@@ -56,7 +56,7 @@ public class ObstacleTest {
         Position initialPosition = new Position(9, 4);
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        Instruction backward = new Instruction('b');
+        InstructionHandler.Instruction backward = InstructionHandler.Instruction.BACKWARD;
 
         rover.move(backward);
 

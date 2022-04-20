@@ -3,6 +3,8 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
+import static core.InstructionHandler.*;
+
 public class Grid {
     private int MAX_HEIGHT = 10;
     private int MAX_WIDTH = 10;

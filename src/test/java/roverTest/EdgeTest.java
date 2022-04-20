@@ -1,19 +1,12 @@
 package roverTest;
 
 import core.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class EdgeTest {
 
-    private static Instruction forward;
-
-    @BeforeAll
-    static void init_forward_instruction() {
-        forward = new Instruction('f');
-    }
 
     @Test
     public void should_reach_the_south_edge_from_the_north_edge_position() {
@@ -22,7 +15,7 @@ public class EdgeTest {
 
         Rover rover = new Rover(initialPosition, Direction.NORTH, grid);
 
-        rover.move(forward);
+        rover.move(InstructionHandler.Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(3, 0));
     }
@@ -34,7 +27,7 @@ public class EdgeTest {
 
         Rover rover = new Rover(initialPosition, Direction.SOUTH, grid);
 
-        rover.move(forward);
+        rover.move(InstructionHandler.Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(3, 7));
     }
@@ -46,7 +39,7 @@ public class EdgeTest {
 
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        rover.move(forward);
+        rover.move(InstructionHandler.Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(7, 1));
     }
@@ -58,7 +51,7 @@ public class EdgeTest {
 
         Rover rover = new Rover(initialPosition, Direction.EAST, grid);
 
-        rover.move(forward);
+        rover.move(InstructionHandler.Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(0, 5));
     }

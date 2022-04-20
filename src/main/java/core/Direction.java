@@ -1,5 +1,7 @@
 package core;
 
+import static core.InstructionHandler.*;
+
 public enum Direction {
     SOUTH {
         private Direction atLeft() {
@@ -12,7 +14,7 @@ public enum Direction {
 
         @Override
         public Direction turn(Instruction instruction) {
-            if (instruction.value() == Instruction.ValidInstruction.LEFT.value)
+            if (Instruction.LEFT.equals(instruction))
                 return this.atLeft();
             return this.atRight();
         }
@@ -27,7 +29,7 @@ public enum Direction {
 
         @Override
         public Direction turn(Instruction instruction) {
-            if (instruction.value() == Instruction.ValidInstruction.LEFT.value)
+            if (Instruction.LEFT.equals(instruction))
                 return this.atLeft();
             return this.atRight();
         }
@@ -42,7 +44,7 @@ public enum Direction {
 
         @Override
         public Direction turn(Instruction instruction) {
-            if (instruction.value() == Instruction.ValidInstruction.LEFT.value)
+            if (Instruction.LEFT.equals(instruction))
                 return this.atLeft();
             return this.atRight();
         }
@@ -57,7 +59,7 @@ public enum Direction {
 
         @Override
         public Direction turn(Instruction instruction) {
-            if (instruction.value() == Instruction.ValidInstruction.LEFT.value)
+            if (Instruction.LEFT.equals(instruction))
                 return this.atLeft();
             return this.atRight();
         }
