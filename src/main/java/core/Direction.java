@@ -3,7 +3,7 @@ package core;
 import static core.InstructionHandler.*;
 
 public enum Direction {
-    SOUTH {
+    SOUTH() {
         public Direction atLeft() {
             return Direction.EAST;
         }
