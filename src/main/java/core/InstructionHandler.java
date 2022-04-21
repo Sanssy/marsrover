@@ -8,17 +8,17 @@ public record InstructionHandler(char instructionHandler) {
     public interface Instruction {
 
         static List<Instruction> values() {
-            return List.of(Rotate.LEFT, Rotate.RIGHT, Move.FORWARD, Move.BACKWARD);
+            return List.of(Rotation.LEFT, Rotation.RIGHT, Move.FORWARD, Move.BACKWARD);
         }
         char value();
     }
 
-    public enum Rotate implements Instruction {
+    public enum Rotation implements Instruction {
         LEFT('l'), RIGHT('r');
 
         private final char value;
 
-        Rotate(char value) {
+        Rotation(char value) {
             this.value = value;
         }
 

@@ -1,10 +1,10 @@
 package core;
 
 import static core.InstructionHandler.*;
-import static core.InstructionHandler.Rotate.LEFT;
+import static core.InstructionHandler.Rotation.LEFT;
 
 public enum Direction {
-    SOUTH() {
+    SOUTH {
         public Direction atLeft() {
             return Direction.EAST;
         }
@@ -42,8 +42,8 @@ public enum Direction {
 
     };
 
-    public Direction turn(Rotate instruction) {
-        return LEFT.equals(instruction) ? this.atLeft() : this.atRight();
+    public Direction rotate(Rotation rotation) {
+        return LEFT.equals(rotation) ? this.atLeft() : this.atRight();
     }
 
     abstract Direction atRight();

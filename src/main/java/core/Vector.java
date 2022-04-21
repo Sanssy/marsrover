@@ -56,11 +56,11 @@ public enum Vector {
 
     abstract Vector opposite();
 
-    public static Vector retrieveTranslationFor(Direction direction, Move instruction) {
+    public static Vector retrieveTranslationFor(Direction direction, Move move) {
 
         Vector vector = vectorRules.get(direction);
 
-        return FORWARD.equals(instruction) ?
+        return FORWARD.equals(move) ?
                 vector : vector.opposite();
     }
 }

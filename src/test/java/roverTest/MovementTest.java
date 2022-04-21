@@ -71,6 +71,4 @@ public class MovementTest {
 
         return new Rover(initialPosition, direction);
     }
-
-
 }

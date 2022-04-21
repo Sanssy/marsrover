@@ -5,8 +5,8 @@ import core.Position;
 import core.Rover;
 import org.junit.jupiter.api.Test;
 
-import static core.InstructionHandler.Rotate.LEFT;
-import static core.InstructionHandler.Rotate.RIGHT;
+import static core.InstructionHandler.Rotation.LEFT;
+import static core.InstructionHandler.Rotation.RIGHT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DirectionTest {
@@ -16,7 +16,7 @@ public class DirectionTest {
     public void should_turn_rover_at_left_and_change_his_direction_facing_north_to_west() {
         Rover rover = initRoverPositionAndDirection(1, 3, Direction.NORTH);
 
-        rover.turn(LEFT);
+        rover.rotate(LEFT);
 
         assertThat(rover.currentDirection()).isEqualTo(Direction.WEST);
     }
@@ -25,7 +25,7 @@ public class DirectionTest {
     public void should_turn_rover_at_left_and_change_his_direction_facing_west_to_north() {
         Rover rover = initRoverPositionAndDirection(2, 3, Direction.WEST);
 
-        rover.turn(LEFT);
+        rover.rotate(LEFT);
 
         assertThat(rover.currentDirection()).isEqualTo(Direction.SOUTH);
     }
@@ -35,7 +35,7 @@ public class DirectionTest {
         Position initialPosition = new Position(2, 4);
         Rover rover = new Rover(initialPosition, Direction.EAST);
 
-        rover.turn(LEFT);
+        rover.rotate(LEFT);
 
         assertThat(rover.currentDirection()).isEqualTo(Direction.NORTH);
     }
@@ -44,7 +44,7 @@ public class DirectionTest {
     public void should_turn_rover_at_right_and_change_his_direction_facing_south_to_east() {
         Rover rover = initRoverPositionAndDirection(3, 1, Direction.SOUTH);
 
-        rover.turn(RIGHT);
+        rover.rotate(RIGHT);
 
         assertThat(rover.currentDirection()).isEqualTo(Direction.WEST);
     }
