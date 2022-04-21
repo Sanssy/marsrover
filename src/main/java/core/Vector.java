@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import static core.InstructionHandler.*;
+import static core.InstructionHandler.Move.FORWARD;
 
 public enum Vector {
 
@@ -55,11 +56,11 @@ public enum Vector {
 
     abstract Vector opposite();
 
-    public static Vector retrieveTranslationFor(Direction direction, Instruction instruction) {
+    public static Vector retrieveTranslationFor(Direction direction, Move instruction) {
 
         Vector vector = vectorRules.get(direction);
 
-        return Instruction.FORWARD.equals(instruction) ?
+        return FORWARD.equals(instruction) ?
                 vector : vector.opposite();
     }
 }

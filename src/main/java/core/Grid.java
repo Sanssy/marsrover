@@ -40,7 +40,7 @@ public class Grid {
         this.obstacles = obstacles;
     }
 
-    public Position nextPosition(Position currentPosition, Direction direction, Instruction instruction) {
+    public Position nextPosition(Position currentPosition, Direction direction, Move instruction) {
         Vector vector = Vector.retrieveTranslationFor(direction, instruction);
         Position nextPosition = currentPosition.predict(vector, this.surface);
 

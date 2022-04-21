@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static core.InstructionHandler.Move.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ObstacleTest {
@@ -21,9 +22,7 @@ public class ObstacleTest {
         Position initialPosition = new Position(3, 7);
         Rover rover = new Rover(initialPosition, Direction.EAST, grid);
 
-        InstructionHandler.Instruction forward = InstructionHandler.Instruction.FORWARD;
-
-        rover.move(forward);
+        rover.move(FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(initialPosition);
     }
@@ -38,9 +37,7 @@ public class ObstacleTest {
         Position initialPosition = new Position(9, 4);
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        InstructionHandler.Instruction backward = InstructionHandler.Instruction.BACKWARD;
-
-        rover.move(backward);
+        rover.move(BACKWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(initialPosition);
     }
@@ -56,9 +53,7 @@ public class ObstacleTest {
         Position initialPosition = new Position(9, 4);
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        InstructionHandler.Instruction backward = InstructionHandler.Instruction.BACKWARD;
-
-        rover.move(backward);
+        rover.move(BACKWARD);
 
         assertThat(rover.state()).isEqualTo(
                 "Command execution aborted due to an obstacle. " +

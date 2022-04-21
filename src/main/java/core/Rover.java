@@ -22,19 +22,21 @@ public class Rover {
 
     public void apply(Commands commands) {
         for (Instruction instruction : commands.execute()) {
-            switch (instruction) {
-                case FORWARD, BACKWARD -> this.move(instruction);
-                case LEFT, RIGHT -> this.turn(instruction);
-                default -> throw new IllegalArgumentException();
+            if (instruction instanceof Move) {
+                this.move((Move) instruction);
+            } else if (instruction instanceof Rotate) {
+                this.turn((Rotate) instruction);
+            } else {
+                throw new IllegalArgumentException();
             }
         }
     }
 
-    public void move(Instruction instruction) {
+    public void move(Move instruction) {
         this.position = this.grid.nextPosition(this.position, this.direction, instruction);
     }
 
-    public void turn(Instruction instruction) {
+    public void turn(Rotate instruction) {
         this.direction = this.direction.turn(instruction);
     }
 
