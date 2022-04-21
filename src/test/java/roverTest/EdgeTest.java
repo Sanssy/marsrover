@@ -3,6 +3,7 @@ package roverTest;
 import core.*;
 import org.junit.jupiter.api.Test;
 
+import static core.InstructionHandler.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class EdgeTest {
@@ -15,7 +16,7 @@ public class EdgeTest {
 
         Rover rover = new Rover(initialPosition, Direction.NORTH, grid);
 
-        rover.move(InstructionHandler.Instruction.FORWARD);
+        rover.move(Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(3, 0));
     }
@@ -27,7 +28,7 @@ public class EdgeTest {
 
         Rover rover = new Rover(initialPosition, Direction.SOUTH, grid);
 
-        rover.move(InstructionHandler.Instruction.FORWARD);
+        rover.move(Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(3, 7));
     }
@@ -39,7 +40,7 @@ public class EdgeTest {
 
         Rover rover = new Rover(initialPosition, Direction.WEST, grid);
 
-        rover.move(InstructionHandler.Instruction.FORWARD);
+        rover.move(Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(7, 1));
     }
@@ -51,7 +52,7 @@ public class EdgeTest {
 
         Rover rover = new Rover(initialPosition, Direction.EAST, grid);
 
-        rover.move(InstructionHandler.Instruction.FORWARD);
+        rover.move(Instruction.FORWARD);
 
         assertThat(rover.currentPosition()).isEqualTo(new Position(0, 5));
     }

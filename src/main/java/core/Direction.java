@@ -44,6 +44,7 @@ public enum Direction {
     public Direction turn(Instruction instruction) {
         return Instruction.LEFT.equals(instruction) ? this.atLeft() : this.atRight();
     }
+
     abstract Direction atRight();
     abstract Direction atLeft();
 }

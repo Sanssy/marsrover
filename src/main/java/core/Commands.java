@@ -16,8 +16,6 @@ public class Commands {
         return this.instructionHandlers;
     }
 
-//    public List<InstructionHandler.Instruction>
-
     private static List<InstructionHandler.Instruction> of(Character... chars) {
         return Arrays.stream(chars)
                 .map(InstructionHandler::new)

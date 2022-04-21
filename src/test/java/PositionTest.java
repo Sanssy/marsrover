@@ -9,7 +9,7 @@ public class PositionTest {
     public void should_translate_position_of_1_0() {
         Position initialPosition = new Position(0,2);
 
-        Position expected = initialPosition.translate(new Vector(1,0));
+        Position expected = initialPosition.translate(Vector.EAST);
 
         Assertions.assertThat(expected).isEqualTo(new Position(1,2));
     }
