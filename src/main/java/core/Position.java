@@ -13,27 +13,20 @@ public record Position(int x, int y) {
         return new Position(x,y);
     }
 
-    public Position predict(Vector vector, Grid.Surface surface) {
+    public Position predict(Vector vector, Grid grid, Grid.Surface surface) {
         Position nextPosition = this.translate(vector);
 
-        return this.isOutside(nextPosition, surface) ?
-                   this.computeEdgePositionWrapper(nextPosition, vector, surface) :
-                   nextPosition;
+        return grid.contains(nextPosition) ?
+                nextPosition :
+                this.computeEdgePositionWrapper(vector, surface);
     }
 
-    private boolean isOutside(Position position,  Grid.Surface surface) {
-        return position.y() > surface.MAX_HEIGHT ||
-               position.x() > surface.MAX_WIDTH  ||
-               position.y() < surface.MIN_HEIGHT ||
-               position.x() < surface.MIN_WIDTH;
-    }
-
-    private Position computeEdgePositionWrapper(Position currentPosition, Vector vector, Grid.Surface surface) {
+    private Position computeEdgePositionWrapper(Vector vector, Grid.Surface surface) {
         return switch (vector) {
-            case NORTH -> Position.generate(currentPosition.x(), surface.MIN_HEIGHT);
-            case SOUTH -> Position.generate(currentPosition.x(), surface.MAX_HEIGHT);
-            case EAST -> Position.generate(surface.MIN_WIDTH, currentPosition.y());
-            case WEST -> Position.generate(surface.MAX_WIDTH, currentPosition.y());
+            case NORTH -> Position.generate(this.x(), surface.MIN_HEIGHT);
+            case SOUTH -> Position.generate(this.x(), surface.MAX_HEIGHT);
+            case EAST -> Position.generate(surface.MIN_WIDTH, this.y());
+            case WEST -> Position.generate(surface.MAX_WIDTH, this.y());
         };
     }
 }

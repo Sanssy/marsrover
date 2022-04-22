@@ -3,8 +3,7 @@ package core;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static core.InstructionHandler.*;
-import static core.InstructionHandler.Move.FORWARD;
+import static core.Instruction.Move.FORWARD;
 
 public enum Vector {
 
@@ -56,7 +55,7 @@ public enum Vector {
 
     abstract Vector opposite();
 
-    public static Vector retrieveTranslationFor(Direction direction, Move move) {
+    public static Vector retrieveTranslationFor(Direction direction, Instruction.Move move) {
 
         Vector vector = vectorRules.get(direction);
 

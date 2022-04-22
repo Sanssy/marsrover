@@ -3,8 +3,6 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.InstructionHandler.*;
-
 public class Grid {
 
     static class Surface {
@@ -40,9 +38,16 @@ public class Grid {
         this.obstacles = obstacles;
     }
 
-    public Position nextPosition(Position currentPosition, Direction direction, Move move) {
+    public boolean contains(Position position) {
+        return !(position.y() > surface.MAX_HEIGHT ||
+                position.x() > surface.MAX_WIDTH  ||
+                position.y() < surface.MIN_HEIGHT ||
+                position.x() < surface.MIN_WIDTH);
+    }
+
+    public Position nextPosition(Position currentPosition, Direction direction, Instruction.Move move) {
         Vector vector = Vector.retrieveTranslationFor(direction, move);
-        Position nextPosition = currentPosition.predict(vector, this.surface);
+        Position nextPosition = currentPosition.predict(vector, this,this.surface);
 
         return this.obstacles.contains(nextPosition) ? currentPosition : nextPosition;
     }

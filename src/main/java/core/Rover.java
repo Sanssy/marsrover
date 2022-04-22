@@ -1,7 +1,5 @@
 package core;
 
-import static core.InstructionHandler.*;
-
 public class Rover {
 
     private Position position;
@@ -21,20 +19,20 @@ public class Rover {
     }
 
     public void apply(Commands commands) {
-        for (Instruction instruction : commands.execute()) {
-            if (instruction instanceof Move)
-                this.move((Move) instruction);
+        for (Instruction instruction : commands.validInstructions()) {
+            if (instruction instanceof Instruction.Move)
+                this.move((Instruction.Move) instruction);
 
-            if (instruction instanceof Rotation)
-                this.rotate((Rotation) instruction);
+            if (instruction instanceof Instruction.Rotation)
+                this.rotate((Instruction.Rotation) instruction);
         }
     }
 
-    public void move(Move move) {
+    public void move(Instruction.Move move) {
         this.position = this.grid.nextPosition(this.position, this.direction, move);
     }
 
-    public void rotate(Rotation toward) {
+    public void rotate(Instruction.Rotation toward) {
         this.direction = this.direction.rotate(toward);
     }
 

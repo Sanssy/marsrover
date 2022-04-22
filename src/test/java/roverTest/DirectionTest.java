@@ -5,8 +5,8 @@ import core.Position;
 import core.Rover;
 import org.junit.jupiter.api.Test;
 
-import static core.InstructionHandler.Rotation.LEFT;
-import static core.InstructionHandler.Rotation.RIGHT;
+import static core.Instruction.Rotation.LEFT;
+import static core.Instruction.Rotation.RIGHT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DirectionTest {

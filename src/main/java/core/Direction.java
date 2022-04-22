@@ -1,7 +1,6 @@
 package core;
 
-import static core.InstructionHandler.*;
-import static core.InstructionHandler.Rotation.LEFT;
+import static core.Instruction.Rotation.LEFT;
 
 public enum Direction {
     SOUTH {
@@ -42,7 +41,7 @@ public enum Direction {
 
     };
 
-    public Direction rotate(Rotation rotation) {
+    public Direction rotate(Instruction.Rotation rotation) {
         return LEFT.equals(rotation) ?
                 this.atLeft() : this.atRight();
     }

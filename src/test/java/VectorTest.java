@@ -3,8 +3,8 @@ import core.Vector;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static core.InstructionHandler.Move.BACKWARD;
-import static core.InstructionHandler.Move.FORWARD;
+import static core.Instruction.Move.BACKWARD;
+import static core.Instruction.Move.FORWARD;
 
 public class VectorTest {
 

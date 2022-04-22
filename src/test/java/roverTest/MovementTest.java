@@ -3,8 +3,8 @@ package roverTest;
 import core.*;
 import org.junit.jupiter.api.Test;
 
-import static core.InstructionHandler.Move.BACKWARD;
-import static core.InstructionHandler.Move.FORWARD;
+import static core.Instruction.Move.BACKWARD;
+import static core.Instruction.Move.FORWARD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MovementTest {
