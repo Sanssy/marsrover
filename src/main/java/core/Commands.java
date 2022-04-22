@@ -6,19 +6,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Commands {
-    private final List<InstructionHandler.Instruction> instructionHandlers;
+    private final List<InstructionHandler> instructionHandlers;
 
     public Commands(Character... chars) {
-        this.instructionHandlers = of(chars);
+        this.instructionHandlers = Arrays.stream(chars)
+                .map(InstructionHandler::new)
+                .collect(Collectors.toList());
     }
 
     public List<InstructionHandler.Instruction> execute() {
-        return this.instructionHandlers;
-    }
-
-    private static List<InstructionHandler.Instruction> of(Character... chars) {
-        return Arrays.stream(chars)
-                .map(InstructionHandler::new)
+        return this.instructionHandlers.stream()
                 .map(InstructionHandler::transform)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
