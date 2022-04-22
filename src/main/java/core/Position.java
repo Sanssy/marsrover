@@ -16,10 +16,9 @@ public record Position(int x, int y) {
     public Position predict(Vector vector, Grid.Surface surface) {
         Position nextPosition = this.translate(vector);
 
-        if (this.isOutside(nextPosition, surface))
-            return this.computeEdgePositionWrapper(nextPosition, vector, surface);
-
-        return nextPosition;
+        return this.isOutside(nextPosition, surface) ?
+                   this.computeEdgePositionWrapper(nextPosition, vector, surface) :
+                   nextPosition;
     }
 
     private boolean isOutside(Position position,  Grid.Surface surface) {

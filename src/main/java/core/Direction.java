@@ -43,7 +43,8 @@ public enum Direction {
     };
 
     public Direction rotate(Rotation rotation) {
-        return LEFT.equals(rotation) ? this.atLeft() : this.atRight();
+        return LEFT.equals(rotation) ?
+                this.atLeft() : this.atRight();
     }
 
     abstract Direction atRight();

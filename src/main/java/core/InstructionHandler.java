@@ -6,7 +6,6 @@ import java.util.Optional;
 public record InstructionHandler(char instructionHandler) {
 
     public interface Instruction {
-
         static List<Instruction> values() {
             return List.of(Rotation.LEFT, Rotation.RIGHT, Move.FORWARD, Move.BACKWARD);
         }
