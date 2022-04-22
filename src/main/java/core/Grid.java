@@ -27,8 +27,7 @@ public class Grid {
     private Grid.Surface surface = new Surface();
     private List<Position> obstacles = new ArrayList<>();
 
-    public Grid() {
-    }
+    public Grid() {}
 
     public Grid(int height, int width) {
         surface = new Surface(height, width);
@@ -38,17 +37,33 @@ public class Grid {
         this.obstacles = obstacles;
     }
 
-    public boolean contains(Position position) {
+    public Position nextPosition(Position currentPosition, Direction direction, Instruction.Move move) {
+        Vector vector = Vector.retrieveTranslationFor(direction, move);
+        Position nextPosition = this.predict(currentPosition, vector);
+
+        return this.obstacles.contains(nextPosition) ? currentPosition : nextPosition;
+    }
+
+    private Position predict(Position currentPosition, Vector vector) {
+        Position nextPosition = currentPosition.translate(vector);
+        return this.contains(nextPosition) ?
+                nextPosition :
+                this.computeEdgePositionWrapper(nextPosition, vector);
+    }
+
+    private Position computeEdgePositionWrapper(Position currentPosition, Vector vector) {
+        return switch (vector) {
+            case NORTH -> Position.generate(currentPosition.x(), surface.MIN_HEIGHT);
+            case SOUTH -> Position.generate(currentPosition.x(), surface.MAX_HEIGHT);
+            case EAST -> Position.generate(surface.MIN_WIDTH, currentPosition.y());
+            case WEST -> Position.generate(surface.MAX_WIDTH, currentPosition.y());
+        };
+    }
+
+    private boolean contains(Position position) {
         return !(position.y() > surface.MAX_HEIGHT ||
                 position.x() > surface.MAX_WIDTH  ||
                 position.y() < surface.MIN_HEIGHT ||
                 position.x() < surface.MIN_WIDTH);
-    }
-
-    public Position nextPosition(Position currentPosition, Direction direction, Instruction.Move move) {
-        Vector vector = Vector.retrieveTranslationFor(direction, move);
-        Position nextPosition = currentPosition.predict(vector, this,this.surface);
-
-        return this.obstacles.contains(nextPosition) ? currentPosition : nextPosition;
     }
 }
