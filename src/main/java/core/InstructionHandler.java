@@ -1,13 +1,19 @@
 package core;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public record InstructionHandler(char instructionHandler) {
 
     public interface Instruction {
         static List<Instruction> values() {
-            return List.of(Rotation.LEFT, Rotation.RIGHT, Move.FORWARD, Move.BACKWARD);
+            return Stream.of(List.of(Rotation.values()), List.of(Move.values()))
+                    .flatMap(Collection::stream)
+                    .collect(Collectors.toList());
         }
         char value();
     }
